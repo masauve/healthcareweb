@@ -375,21 +375,21 @@ $(document).ready(function() {
     try{
 
 			//##Displaying messaging in Clinic Console
-			var clinicsocket = new WebSocket("ws://clinicservice-healthcare-healthcare-demo.apps.aws.ocp3demo.com/demo");
+			var clinicsocket = new WebSocket("ws://clinicservice-healthcare-demo.apps.aws.ocp3demo.com/demo");
 			clinicsocket.onopen = function(){ clinicMessage('Starting Clinic System Simulator v 1.0.0 ......');}
 			clinicsocket.onmessage = function(msg){clinicMessage('Patient===> '+msg.data+' admitted!');}
 			clinicsocket.onclose = function(){clinicMessage('Clinic System shutdown...');}
     	function clinicMessage(msg){$('#clinicDiv').html(message(clinicConsoleArray,msg));}
 
 			//##Displaying messaging in Laboratory Console
-			var labsocket = new WebSocket("ws://laboratoryservice-healthcare-healthcare-demo.apps.aws.ocp3demo.com/demo");
+			var labsocket = new WebSocket("ws://laboratoryservice-healthcare-demo.apps.aws.ocp3demo.com/demo");
 			labsocket.onopen = function(){ labMessage('Starting Laboratory System Simulator v 1.4.0 ......');}
 			labsocket.onmessage = function(msg){labMessage(msg.data);}
 			labsocket.onclose = function(){labMessage('Laboratory System shutdown...');}
     	function labMessage(msg){$('#labDiv').html(message(labConsoleArray,msg));}
     	
 			//##Displaying messaging in Radiology Console
-			var radiologysocket = new WebSocket("ws://radiologyservice-healthcare-healthcare-demo.apps.aws.ocp3demo.com/demo");
+			var radiologysocket = new WebSocket("ws://radiologyservice-healthcare-demo.apps.aws.ocp3demo.com/demo");
 			radiologysocket.onopen = function(){ radiologyMessage('Starting Radiology System Simulator v 2.0.5 ......');}
 			radiologysocket.onmessage = function(msg){radiologyMessage('Patient '+msg.data);}
 			radiologysocket.onclose = function(){radiologyMessage('Radiology System shutdown...');}
