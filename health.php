@@ -488,8 +488,6 @@ function populatePharmacyTable(pharmacyhisid) {
     var gw_host = "<?php echo $gw_host; ?>";
     var tableContent = '';
 	  var pharmacyUrl = 'http://'+gw_host+'/his/pharmacy/'+pharmacyhisid+'/?user_key='+user_key;
-	  alert('PharmacyUrl'
-		
 		
 		if("" == pharmacyhisid){
 			alert('Please enter HIS ID in the Pharmacy section!');	
