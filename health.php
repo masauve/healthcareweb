@@ -456,10 +456,12 @@ $(document).ready(function() {
 
 function populateTable() {
 
+    var user_key = "<?php echo $user_key; ?>";
+    var gw_host = "<?php echo $gw_host; ?>";
     var tableContent = '';
 
 
-    $.get( 'http://healthwebconsole-healthcare-demo.apps.aws.ocp3demo.com/his/allpatients', function( data ) {
+    $.get( 'http://'+gw_host+'/his/allpatients?user_key='+user_key, function( data ) {
 				var lineByline = data.split('\n');
         $.each(lineByline , function(index,value){
         	
