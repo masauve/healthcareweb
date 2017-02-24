@@ -341,7 +341,7 @@ $( "#dialog-link, #icons li" ).hover(
 		$.ajax({ 
 		   type: "GET",
 		   dataType: "jsonp",
-		   url: "http://"+gw_host+"/his/dotest/"+$('input[name=hisId]').val()+"/"+$( "#dept option:selected" ).val()+"/"+$('input[name=testdetail]').val()+"/"+$('input[name=observation]').val()+"?user_key="+user+key,
+		   url: "http://"+gw_host+"/his/dotest/"+$('input[name=hisId]').val()+"/"+$( "#dept option:selected" ).val()+"/"+$('input[name=testdetail]').val()+"/"+$('input[name=observation]').val()+"?user_key="+user_key,
 		   success: function(data){        
 		     alert(data);
 		   }
