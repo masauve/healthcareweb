@@ -50,16 +50,16 @@
 	select {
 		width: 200px;
 	}
-	
+
 	table, th, td {
 	    border: 0px;
 	    border-collapse: collapse;
 	}
 	th, td {
 	    padding: 5px;
-	    text-align: left;    
+	    text-align: left;
 	}
-	
+
 	.zui-table {
     border: solid 1px #DDEEEE;
     border-collapse: collapse;
@@ -121,13 +121,13 @@
 						</tr>
 						<tr>
 							<th rowspan="2"><button id="button" type="button">Register</button></th>
-						</tr>												
+						</tr>
 					</table>
-				</form>	
+				</form>
 				</p>
 			</div>
 		</td>
-    <td> 	
+    <td>
     	<div class="rcorners">
     		<h2 class="demoHeaders"><img src="clinic.png" height="30" width="30">   Clinic</h2>
 				<div id="clinicDiv"/>
@@ -160,14 +160,14 @@
 							</tr>
 							<tr>
 								<th rowspan="2"><button id="dotest" type="button">Go Test!</button></th>
-							</tr>												
+							</tr>
 					</table>
 			</div>
 			<div id="clinictwo" style="display:none">
-				<table >	
+				<table >
 					<tr>
 						<th>Prescription:</th>
-						<td>		
+						<td>
 										<select id="interval">
 									    <option value="QD">Dialy</option>
 									    <option value="QH">Hourly</option>
@@ -233,7 +233,7 @@
   	<td>
   		<div class="rcorners-purple">
 				<h2 class="demoHeaders"><img src="CS-Logo-PNG.png" height="30" width="30">   Pharmacy</h2>
-				HIS ID: <input type="text" name="pharmacyhisId"> 
+				HIS ID: <input type="text" name="pharmacyhisId">
 				<button id="pharmacybutton" type="button">Get Prescription!</button>
 				<BR/>
 				<BR/>
@@ -248,17 +248,17 @@
 				  <tbody id="pharmacytablediv">
 			    </tbody>
 				</table>
-				
-  			
-  			
-  	
+
+
+
+
 			</div>
   	</td>
-  	
+
   </tr>
 </table>
 
-	
+
 <script src="external/jquery/jquery.js"></script>
 <script src="jquery-ui.js"></script>
 <script>
@@ -303,73 +303,73 @@ $( "#dialog-link, #icons li" ).hover(
 );
 
 	$("#button").click(function(){
-		
-		$.ajax({ 
+
+		$.ajax({
 		   type: "GET",
 		   dataType: "jsonp",
 		   url: "http://"+gw_host+"/his/registry/"+$('input[name=firstname]').val()+"/"+$('input[name=familyname]').val()+"/"+$('input[name=hisId]').val()+"?user_key="+user_key,
-		   success: function(data){        
+		   success: function(data){
 		     alert(data);
 		   }
-		   
+
 		});
 		$('input[name=clinichisId]').val($('input[name=hisId]').val());
-		
+
 		setTimeout( populateTable(), 5000);
 		$("#clinicone").show();
 		$("#clinictwo").show();
 	});
-	
+
 	$("#dotest").click(function(){
 		if($('input[name=hisId]').val() == null || $('input[name=hisId]').val() == ""){
 			alert('Must specify His ID');
     	return;
     }
-    
+
     if($('input[name=testdetail]').val() == null || $('input[name=testdetail]').val() == ""){
     	alert('Specify Test details please!');
     	return;
     }
-    
+
     if($('input[name=observation]').val() == null || $('input[name=observation]').val() == ""){
     	alert('Must enter observation detail before sending patient for more test!');
     	return;
     }
-        		
-        		
-		
-		$.ajax({ 
+
+
+
+		$.ajax({
 		   type: "GET",
 		   dataType: "jsonp",
 		   url: "http://"+gw_host+"/his/dotest/"+$('input[name=hisId]').val()+"/"+$( "#dept option:selected" ).val()+"/"+$('input[name=testdetail]').val()+"/"+$('input[name=observation]').val()+"?user_key="+user_key,
-		   success: function(data){        
+		   success: function(data){
 		     alert(data);
 		   }
-		   
+
 		});
 	});
 
 	$("#prescribe").click(function(){
-		
-		$.ajax({ 
+
+		$.ajax({
 		   type: "GET",
 		   dataType: "jsonp",
 		   url: "http://"+gw_host+"/his/prescribe/"+$('input[name=hisId]').val()+"/"+$('#interval option:selected').val()+"/"+$('#drugs option:selected').val()+"?user_key="+user_key,
-		   success: function(data){        
+		   success: function(data){
 		     alert(data);
 		   }
-		   
+
 		});
 	});
 
 	$("#pharmacybutton").click(function(){
-		
+
 		populatePharmacyTable($('input[name=pharmacyhisId]').val());
 	});
-	
-		
+
+
 $(document).ready(function() {
-	
+
 	if(!("WebSocket" in window)){
 		$('#chatLog, input, button, #examples').fadeOut("fast");
 		$('<p>Oh no, you need a browser that supports WebSockets. How about <a href="http://www.google.com/chrome">Google Chrome</a>?</p>').appendTo('#container');
@@ -393,67 +393,67 @@ $(document).ready(function() {
 			labsocket.onmessage = function(msg){labMessage(msg.data);}
 			labsocket.onclose = function(){labMessage('Laboratory System shutdown...');}
     	function labMessage(msg){$('#labDiv').html(message(labConsoleArray,msg));}
-    	
+
 			//##Displaying messaging in Radiology Console
 			var radiologysocket = new WebSocket("ws://radiologyservice-healthcare-demo.apps.aws.ocp3demo.com/demo");
 			radiologysocket.onopen = function(){ radiologyMessage('Starting Radiology System Simulator v 2.0.5 ......');}
 			radiologysocket.onmessage = function(msg){radiologyMessage('Patient '+msg.data);}
 			radiologysocket.onclose = function(){radiologyMessage('Radiology System shutdown...');}
     	function radiologyMessage(msg){$('#radiologyDiv').html(message(radiologyConsoleArray,msg));}
-    	
-    	//##Connect to ESB Message 
+
+    	//##Connect to ESB Message
     	var esbmsgsocket = new WebSocket("ws://hisesb-healthcare-demo.apps.aws.ocp3demo.com/demo");
 			esbmsgsocket.onopen = function(){console.log('Starting getting ESB messages ......');}
-			
+
 			esbmsgsocket.onmessage = function(msg){
 				esbMsgArray.push(createESBMsg(msg.data));
 				if(esbMsgArray.length > MAX_ESB_MSG_DISPLAY){
 					esbMsgArray.shift();
 				}
-				
+
 				var msgContent="";
-				for (i = 0; i < esbMsgArray.length; i++) { 
+				for (i = 0; i < esbMsgArray.length; i++) {
 					msgContent += esbMsgArray[i]+"<br/> ";
 				}
-				
+
 				$('#esbMsgDiv').html(msgContent);
 			}
-			
+
 			esbmsgsocket.onclose = function(){console.log('Stop getting ESB messages');}
-    	
-    	
+
+
 		} catch(exception){clinicMessage('Error:'+exception);}
-			
-					
+
+
 			function message(consoleArray, msg){
-				consoleArray.push(msg);		
-				
+				consoleArray.push(msg);
+
 				if(consoleArray.length > MAX_CONSOLE_LINE_DISPLAY){
 					consoleArray.shift();
 				}
-				
+
 				var msgContent="";
-				for (i = 0; i < consoleArray.length; i++) { 
-					
+				for (i = 0; i < consoleArray.length; i++) {
+
 					msgContent += consoleArray[i]+"<br/> ";
-					
+
 				}
-				
+
 				return msgContent;
 			}
-			
+
 			function createESBMsg(msg){
 				var msgcontent='<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;"><p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span><strong>Message transmitted : </strong>"';
 				msgcontent += msg;
 				msgcontent += '</p></div>';
-				 
+
 				return msgcontent;
 			}
 		}
-	
+
 	}
-	
-	
+
+
 });
 
 function populateTable() {
@@ -465,29 +465,23 @@ function populateTable() {
     $.ajax({
          url: 'http://'+gw_host+'/his/allpatients?user_key='+user_key,
          type: "GET",
-         beforeSend: function(xhr){xhr.setRequestHeader('Access-Control-Allow-Origin', '*');},
-         success: function(data) { 
-				var lineByline = data.split('\n');
-        $.each(lineByline , function(index,value){
-        	
-        		if(value == null || value == ""){
-        			return;
-        		}
-            tableContent += '<tr>';
-						
-						var tabBytab = value.split('\t');
-						$.each(tabBytab , function(indext,valuet){
-							if(valuet != null || valuet != "")
-							 tableContent += '<td>' + valuet + '</td>';
-						});
-						
-           
-            tableContent += '</tr>';
-          });
-        });
-
-
+         headers: {'Access-Control-Allow-Origin': '*'},
+         success: function(data) {
+				       var lineByline = data.split('\n');
+               $.each(lineByline , function(index,value){
+            		   if(value == null || value == ""){
+        			          return;
+        		       }
+                   tableContent += '<tr>';
+				  	 			 var tabBytab = value.split('\t');
+						       $.each(tabBytab , function(indext,valuet){
+							       if(valuet != null || valuet != "")
+							       tableContent += '<td>' + valuet + '</td>';
+						       });
+                  tableContent += '</tr>';
+               });
         $('#tablediv').html(tableContent);
+      }
     });
 };
 
@@ -496,33 +490,33 @@ function populatePharmacyTable(pharmacyhisid) {
     var gw_host = "<?php echo $gw_host; ?>";
     var tableContent = '';
 	  var pharmacyUrl = 'http://'+gw_host+'/his/pharmacy/'+pharmacyhisid+'/?user_key='+user_key;
-		
+
 		if("" == pharmacyhisid){
-			alert('Please enter HIS ID in the Pharmacy section!');	
+			alert('Please enter HIS ID in the Pharmacy section!');
 			return;
 		}else{
-		
+
 	    $.get(pharmacyUrl, function( data ) {
-	    	 
+
 					if(""== data){
 						alert('No Prescription Found for HIS ID:'+pharmacyhisid);
 					}else{
 		      	var lineByline = data.split('\n');
 		        $.each(lineByline , function(index,value){
-		        	
+
 		            tableContent += '<tr>';
-								
+
 								var tabBytab = value.split('\t');
 								$.each(tabBytab , function(indext,valuet){
 									 tableContent += '<td>' + valuet + '</td>';
 								});
-								
-		           
+
+
 		            tableContent += '</tr>';
 		        });
 	        }
-	
-	
+
+
 	        $('#pharmacytablediv').html(tableContent);
 	    });
 	  }
