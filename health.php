@@ -483,7 +483,7 @@ function populateTable() {
 						
            
             tableContent += '</tr>';
-          }
+          });
         });
 
 
