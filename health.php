@@ -307,7 +307,7 @@ $( "#dialog-link, #icons li" ).hover(
 		$.ajax({ 
 		   type: "GET",
 		   dataType: "jsonp",
-		   url: "http://healthwebconsole-healthcare-demo.apps.aws.ocp3demo.com/his/registry/"+$('input[name=firstname]').val()+"/"+$('input[name=familyname]').val()+"/"+$('input[name=hisId]').val(),
+		   url: "http://"+gw_host+"/his/registry/"+$('input[name=firstname]').val()+"/"+$('input[name=familyname]').val()+"/"+$('input[name=hisId]').val()+"?user_key="+user_key,
 		   success: function(data){        
 		     alert(data);
 		   }
@@ -354,7 +354,7 @@ $( "#dialog-link, #icons li" ).hover(
 		$.ajax({ 
 		   type: "GET",
 		   dataType: "jsonp",
-		   url: "http://healthwebconsole-healthcare-demo.apps.aws.ocp3demo.com/his/prescribe/"+$('input[name=hisId]').val()+"/"+$('#interval option:selected').val()+"/"+$('#drugs option:selected').val(),
+		   url: "http://"+gw_host+"/his/prescribe/"+$('input[name=hisId]').val()+"/"+$('#interval option:selected').val()+"/"+$('#drugs option:selected').val()+"?user_key="+user_key,
 		   success: function(data){        
 		     alert(data);
 		   }
