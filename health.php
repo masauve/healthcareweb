@@ -262,6 +262,8 @@
 <script src="external/jquery/jquery.js"></script>
 <script src="jquery-ui.js"></script>
 <script>
+var user_key = "<?php echo $user_key; ?>";
+var gw_host = "<?php echo $gw_host; ?>";
 var MAX_ESB_MSG_DISPLAY=2;
 var MAX_CONSOLE_LINE_DISPLAY=6;
 
@@ -339,7 +341,7 @@ $( "#dialog-link, #icons li" ).hover(
 		$.ajax({ 
 		   type: "GET",
 		   dataType: "jsonp",
-		   url: "http://healthwebconsole-healthcare-demo.apps.aws.ocp3demo.com/his/dotest/"+$('input[name=hisId]').val()+"/"+$( "#dept option:selected" ).val()+"/"+$('input[name=testdetail]').val()+"/"+$('input[name=observation]').val(),
+		   url: "http://"+gw_host+"/his/dotest/"+$('input[name=hisId]').val()+"/"+$( "#dept option:selected" ).val()+"/"+$('input[name=testdetail]').val()+"/"+$('input[name=observation]').val()+"?user_key="+user+key,
 		   success: function(data){        
 		     alert(data);
 		   }
