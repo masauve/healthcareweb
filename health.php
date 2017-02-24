@@ -462,8 +462,11 @@ function populateTable() {
     var gw_host = "<?php echo $gw_host; ?>";
     var tableContent = '';
 
-
-    $.get( 'http://'+gw_host+'/his/allpatients?user_key='+user_key, function( data ) {
+    $.ajax({
+         url: 'http://'+gw_host+'/his/allpatients?user_key='+user_key,
+         type: "GET",
+         beforeSend: function(xhr){xhr.setRequestHeader('Access-Control-Allow-Origin', '*');},
+         success: function(data) { 
 				var lineByline = data.split('\n');
         $.each(lineByline , function(index,value){
         	
@@ -480,6 +483,7 @@ function populateTable() {
 						
            
             tableContent += '</tr>';
+          }
         });
 
 
