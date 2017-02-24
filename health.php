@@ -487,7 +487,8 @@ function populatePharmacyTable(pharmacyhisid) {
     var user_key = "<?php echo $user_key; ?>";
     var gw_host = "<?php echo $gw_host; ?>";
     var tableContent = '';
-	  var pharmacyUrl = 'http://"+gw_host+"/his/pharmacy/'+pharmacyhisid+"/?user_key="+user_key;
+	  var pharmacyUrl = 'http://'+gw_host+'/his/pharmacy/'+pharmacyhisid+'/?user_key='+user_key;
+	  alert('PharmacyUrl'
 		
 		
 		if("" == pharmacyhisid){
